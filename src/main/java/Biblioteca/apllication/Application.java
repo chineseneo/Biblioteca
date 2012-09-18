@@ -53,11 +53,12 @@ public class Application {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            System.out.println("The system met a fatal error, will exit now!");
+            System.exit(1);
         }
     }
 
-    private void executeUserOption(int choice) {
+    private void executeUserOption(int choice) throws IOException{
         UserOption option;
         switch (choice)
         {
@@ -71,11 +72,7 @@ public class Application {
             default:
                 return;
         }
-        try {
-            outPutStream.write(option.execute().getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+        outPutStream.write(option.execute().getBytes());
     }
 
     public void setOutPutStream(OutputStream outPutStream) {

@@ -30,39 +30,27 @@ public class ApplicationTest {
     private String welcomeMessage = "Welcome\n";
 
     @Test
-    public void shouldGiveWelcomeMessage()
+    public void shouldGiveWelcomeMessage() throws IOException
     {
-        try {
-            application.showWelcomeMessage();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        application.showWelcomeMessage();
         assertEquals(welcomeMessage, out.toString());
     }
 
     @Test
-    public void shouldGiveMenuOption()
+    public void shouldGiveMenuOption() throws IOException
     {
 
-        try {
-            application.setMenuOptionString(wantedMenuOptionString);
-            application.showMenuOption();
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+        application.setMenuOptionString(wantedMenuOptionString);
+        application.showMenuOption();
         assertEquals(wantedMenuOptionString, out.toString());
     }
 
     @Test
-    public void shouldDeclineInvalidUserOption()
+    public void shouldDeclineInvalidUserOption() throws IOException
     {
         in = new ByteArrayInputStream(invalidOption.getBytes());
         application.setInputStream(in);
-        try {
-            application.acceptUserOption();
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+        application.acceptUserOption();
         assertEquals(wantedDeclineString, out.toString());
     }
 

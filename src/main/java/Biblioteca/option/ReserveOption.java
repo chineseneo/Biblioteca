@@ -31,22 +31,17 @@ public class ReserveOption implements UserOption {
         this.outputStream = out;
     }
 
-    public String execute()
+    public String execute() throws IOException
     {
         requestForUserChoice();
-
         if (choice > bookList.size())
             return failMessage;
         else
             return successMessage;
     }
 
-    private void requestForUserChoice() {
-        try {
-            outputStream.write(requestMessage.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+    private void requestForUserChoice() throws IOException{
+        outputStream.write(requestMessage.getBytes());
         Scanner scanner = new Scanner(inputStream);
         choice = scanner.nextInt();
     }

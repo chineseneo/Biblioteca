@@ -4,6 +4,7 @@ import org.junit.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class ReserveOptionTest {
     }
 
     @Test
-    public void shouldAcceptValidUserChoice()
+    public void shouldAcceptValidUserChoice() throws IOException
     {
         option = new ReserveOption(bookList, new ByteArrayInputStream("1".getBytes()), new ByteArrayOutputStream());
         option.setSuccessMessage(successMessage);
@@ -39,7 +40,7 @@ public class ReserveOptionTest {
     }
 
     @Test
-    public void shouldRejectInvalidUserChoice()
+    public void shouldRejectInvalidUserChoice() throws IOException
     {
         option = new ReserveOption(bookList, new ByteArrayInputStream("3".getBytes()), new ByteArrayOutputStream());
         option.setRejectMessage(failMessage);
