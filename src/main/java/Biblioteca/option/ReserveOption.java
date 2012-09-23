@@ -1,8 +1,10 @@
 package Biblioteca.option;
 
+import Biblioteca.IO.IO;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,22 +18,20 @@ import java.util.Scanner;
 public class ReserveOption implements UserOption {
 
     private List<String> bookList;
-    private InputStream inputStream;
-    private OutputStream outputStream;
     private int choice;
+    private IO io;
 
     private String successMessage = "Thank You! Enjoy the book.\n";
     private String failMessage = "Sorry we don't have that book yet.\n";
     private String requestMessage = "Please which book to reserve:\n";
 
-    public ReserveOption(List<String> bookList, InputStream in, OutputStream out)
+    public ReserveOption(List<String> bookList, IO io)
     {
         this.bookList = bookList;
-        this.inputStream = in;
-        this.outputStream = out;
+        this.io = io;
     }
 
-    public String execute() throws IOException
+    public String execute()
     {
         requestForUserChoice();
         if (choice > bookList.size())
@@ -40,9 +40,9 @@ public class ReserveOption implements UserOption {
             return successMessage;
     }
 
-    private void requestForUserChoice() throws IOException{
-        outputStream.write(requestMessage.getBytes());
-        Scanner scanner = new Scanner(inputStream);
+    private void requestForUserChoice() {
+        io.print(requestMessage);
+        Scanner scanner = io.getScanner();
         choice = scanner.nextInt();
     }
 

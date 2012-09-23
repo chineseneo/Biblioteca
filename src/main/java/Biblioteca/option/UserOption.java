@@ -1,7 +1,5 @@
 package Biblioteca.option;
 
-import java.io.IOException;
-
 /**
  * Created with IntelliJ IDEA.
  * User: twer
@@ -10,5 +8,5 @@ import java.io.IOException;
  * To change this template use File | Settings | File Templates.
  */
 public interface UserOption {
-    public String execute() throws IOException;
+    public String execute() ;
 }

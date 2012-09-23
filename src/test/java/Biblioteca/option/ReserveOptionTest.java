@@ -1,10 +1,10 @@
 package Biblioteca.option;
 
-import org.junit.*;
+import Biblioteca.IO.IO;
+import org.junit.Before;
+import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,18 +23,22 @@ public class ReserveOptionTest {
 
     private List<String> bookList;
     private ReserveOption option;
+    private IO io;
 
     @Before
     public void init() {
         bookList = new ArrayList<String>();
         bookList.add("Head First Java");
         bookList.add("Head First Ruby");
+        io = new IO();
+        io.setWriter(new BufferedWriter(new StringWriter()));
     }
 
     @Test
     public void shouldAcceptValidUserChoice() throws IOException
     {
-        option = new ReserveOption(bookList, new ByteArrayInputStream("1".getBytes()), new ByteArrayOutputStream());
+        io.setReader(new BufferedReader(new StringReader("1")));
+        option = new ReserveOption(bookList, io);
         option.setSuccessMessage(successMessage);
         assertEquals(successMessage, option.execute());
     }
@@ -42,7 +46,8 @@ public class ReserveOptionTest {
     @Test
     public void shouldRejectInvalidUserChoice() throws IOException
     {
-        option = new ReserveOption(bookList, new ByteArrayInputStream("3".getBytes()), new ByteArrayOutputStream());
+        io.setReader(new BufferedReader(new StringReader("3")));
+        option = new ReserveOption(bookList, io);
         option.setRejectMessage(failMessage);
         assertEquals(failMessage, option.execute());
     }

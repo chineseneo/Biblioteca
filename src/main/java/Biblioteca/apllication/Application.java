@@ -1,25 +1,19 @@
 package Biblioteca.apllication;
 
-import Biblioteca.option.*;
+import Biblioteca.IO.IO;
+import Biblioteca.option.CheckOption;
+import Biblioteca.option.ReserveOption;
+import Biblioteca.option.UserOption;
+import Biblioteca.option.ViewOption;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Created with IntelliJ IDEA.
- * User: twer
- * Date: 9/13/12
- * Time: 9:08 PM
- * To change this template use File | Settings | File Templates.
- */
 public class Application {
 
-    private OutputStream outPutStream;
-    private InputStream inputStream;
+    IO io;
     private String welcomeString = "Welcome to the Biblioteca system!\n";
     private String menuOptionString = "\nValid options are:\n" +
             "1. View all books\n" +
@@ -32,39 +26,35 @@ public class Application {
 
     public static void main(String[] args)
     {
-        new Application().run();
+        IO io = new IO();
+        io.setWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+        io.setReader(new BufferedReader(new InputStreamReader(System.in)));
+        new Application(io).run();
     }
 
-    public Application() {
-        setInputStream(System.in);
-        setOutPutStream(System.out);
+    public Application(IO io) {
+        this.io = io;
         bookList = new ArrayList<String>();
         bookList.add("Head First Java");
         bookList.add("Head First Ruby");
     }
 
     public void run(){
-        try {
             showWelcomeMessage();
             while (true)
             {
                 showMenuOption();
                 executeUserOption(acceptUserOption());
             }
-
-        } catch (IOException e) {
-            System.out.println("The system met a fatal error, will exit now!");
-            System.exit(1);
-        }
     }
 
-    private void executeUserOption(int choice) throws IOException{
+    private void executeUserOption(int choice) {
         UserOption option;
         switch (choice)
         {
             case 1:option = new ViewOption(bookList);
                 break;
-            case 2:option = new ReserveOption(bookList, inputStream, outPutStream);
+            case 2:option = new ReserveOption(bookList, io);
                 break;
             case 3:option = new CheckOption();
                 break;
@@ -72,31 +62,23 @@ public class Application {
             default:
                 return;
         }
-        outPutStream.write(option.execute().getBytes());
+        io.print(option.execute());
     }
 
-    public void setOutPutStream(OutputStream outPutStream) {
-        this.outPutStream = outPutStream;
+    public void showWelcomeMessage()  {
+        io.print(welcomeString);
     }
 
-    public void setInputStream(InputStream inputStream) {
-        this.inputStream = inputStream;
+    public void showMenuOption()  {
+        io.print(menuOptionString);
     }
 
-    public void showWelcomeMessage() throws IOException {
-        outPutStream.write(welcomeString.getBytes());
-    }
-
-    public void showMenuOption() throws IOException {
-        outPutStream.write(menuOptionString.getBytes());
-    }
-
-    public int acceptUserOption() throws IOException {
-        Scanner scanner = new Scanner(inputStream);
+    public int acceptUserOption()  {
+        Scanner scanner = io.getScanner();
         int choice = scanner.nextInt();
         int optionCount = getOptionCount();
         if(choice > optionCount)
-            outPutStream.write(declineMessage.getBytes());
+            io.print(declineMessage);
         return choice;
     }
 

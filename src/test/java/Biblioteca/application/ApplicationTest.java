@@ -1,5 +1,6 @@
 package Biblioteca.application;
 
+import Biblioteca.IO.IO;
 import Biblioteca.apllication.Application;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,8 +19,11 @@ import static junit.framework.Assert.assertEquals;
 public class ApplicationTest {
 
 
-    private OutputStream out;
-    private InputStream in;
+    private StringWriter writer;
+    private BufferedWriter bufferedWriter;
+    private StringReader reader;
+    private BufferedReader bufferedReader;
+    private IO io;
     private Application application;
 
     private String wantedMenuOptionString = "1. View all books\n" +
@@ -33,7 +37,7 @@ public class ApplicationTest {
     public void shouldGiveWelcomeMessage() throws IOException
     {
         application.showWelcomeMessage();
-        assertEquals(welcomeMessage, out.toString());
+        assertEquals(welcomeMessage, writer.toString());
     }
 
     @Test
@@ -42,23 +46,26 @@ public class ApplicationTest {
 
         application.setMenuOptionString(wantedMenuOptionString);
         application.showMenuOption();
-        assertEquals(wantedMenuOptionString, out.toString());
+        assertEquals(wantedMenuOptionString, writer.toString());
     }
 
     @Test
     public void shouldDeclineInvalidUserOption() throws IOException
     {
-        in = new ByteArrayInputStream(invalidOption.getBytes());
-        application.setInputStream(in);
+        reader = new StringReader(invalidOption);
+        bufferedReader = new BufferedReader(reader);
+        io.setReader(bufferedReader);
         application.acceptUserOption();
-        assertEquals(wantedDeclineString, out.toString());
+        assertEquals(wantedDeclineString, writer.toString());
     }
 
     @Before
-    public void initApplication() {
-        out = new ByteArrayOutputStream();
-        application = new Application();
-        application.setOutPutStream(out);
+    public void initApplication() throws IOException{
+        io = new IO();
+        writer = new StringWriter();
+        bufferedWriter = new BufferedWriter(writer);
+        io.setWriter(bufferedWriter);
+        application = new Application(io);
         application.setMenuOptionString(wantedMenuOptionString);
         application.setDeclineMessage(wantedDeclineString);
         application.setWelcomeMessage(welcomeMessage);
