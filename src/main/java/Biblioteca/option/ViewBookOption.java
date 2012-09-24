@@ -11,10 +11,10 @@ import java.util.List;
  * Time: 10:33 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ViewOption implements UserOption {
+public class ViewBookOption implements UserOption {
     List<Book> bookList;
 
-    public ViewOption(List<Book> bookList)
+    public ViewBookOption(List<Book> bookList)
     {
         this.bookList = bookList;
     }

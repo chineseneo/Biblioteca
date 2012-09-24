@@ -29,7 +29,6 @@ public class ApplicationTest {
     private String wantedMenuOptionString = "1. View all books\n" +
             "2. Reserve a book\n" +
             "3. check details";
-    private String invalidOption = "4";
     private String wantedDeclineString = "Select a valid option!!\n";
     private String welcomeMessage = "Welcome\n";
 
@@ -52,6 +51,15 @@ public class ApplicationTest {
     @Test
     public void shouldDeclineInvalidUserOption() throws IOException
     {
+        int optionsCount = 0;
+        for(Character c : wantedMenuOptionString.toCharArray())
+        {
+            if (Character.isDigit(c))
+            {
+                optionsCount++;
+            }
+        }
+        String invalidOption = String.valueOf(optionsCount + 1);
         reader = new StringReader(invalidOption);
         bufferedReader = new BufferedReader(reader);
         io.setReader(bufferedReader);

@@ -6,7 +6,7 @@ import Biblioteca.library.Library;
 import Biblioteca.option.CheckOption;
 import Biblioteca.option.ReserveOption;
 import Biblioteca.option.UserOption;
-import Biblioteca.option.ViewOption;
+import Biblioteca.option.ViewBookOption;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +54,7 @@ public class Application {
         switch (choice)
         {
             case 1:
-                option = new ViewOption(library.getBookList());
+                option = new ViewBookOption(library.getBookList());
                 break;
             case 2:
                 option = new ReserveOption(library.getBookList(), io);

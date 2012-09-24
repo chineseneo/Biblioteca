@@ -16,7 +16,7 @@ import static junit.framework.Assert.assertEquals;
  * Time: 10:32 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ViewOptionTest {
+public class ViewBookOptionTest {
 
     private List<Book> bookList;
 
@@ -29,7 +29,7 @@ public class ViewOptionTest {
             bookListString += String.valueOf(i + 1) + ". " + bookList.get(i).show() + "\n";
         }
 
-        ViewOption option = new ViewOption(bookList);
+        ViewBookOption option = new ViewBookOption(bookList);
         assertEquals(bookListString, option.execute());
     }
 
