@@ -13,6 +13,7 @@ import java.util.List;
 public class Library {
 
     private List<Book> bookList;
+    private List<Movie> movieList;
 
     public Library()
     {
@@ -21,6 +22,7 @@ public class Library {
         Book headFirstRails = new Book("Head First Rails", "David Griffiths", "49.99");
         bookList.add(headFirstJava);
         bookList.add(headFirstRails);
+        movieList = new ArrayList<Movie>();
     }
 
     public List<Book> getBookList() {
@@ -29,5 +31,13 @@ public class Library {
 
     public void addBook(Book book) {
         bookList.add(book);
+    }
+
+    public void addMovie(Movie movie) {
+        movieList.add(movie);
+    }
+
+    public List<Movie> getMovieList() {
+        return movieList;  //To change body of created methods use File | Settings | File Templates.
     }
 }
