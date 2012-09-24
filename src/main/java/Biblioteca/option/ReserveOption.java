@@ -1,10 +1,8 @@
 package Biblioteca.option;
 
 import Biblioteca.IO.IO;
+import Biblioteca.library.Book;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,15 +15,15 @@ import java.util.Scanner;
  */
 public class ReserveOption implements UserOption {
 
-    private List<String> bookList;
+    private List<Book> bookList;
     private int choice;
     private IO io;
 
     private String successMessage = "Thank You! Enjoy the book.\n";
     private String failMessage = "Sorry we don't have that book yet.\n";
-    private String requestMessage = "Please which book to reserve:\n";
+    private String requestMessage = "Please choose which book to reserve:\n";
 
-    public ReserveOption(List<String> bookList, IO io)
+    public ReserveOption(List<Book> bookList, IO io)
     {
         this.bookList = bookList;
         this.io = io;

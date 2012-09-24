@@ -1,5 +1,7 @@
 package Biblioteca.option;
 
+import Biblioteca.library.Book;
+
 import java.util.List;
 
 /**
@@ -10,9 +12,9 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class ViewOption implements UserOption {
-    List<String> bookList;
+    List<Book> bookList;
 
-    public ViewOption(List<String> bookList)
+    public ViewOption(List<Book> bookList)
     {
         this.bookList = bookList;
     }
@@ -22,7 +24,7 @@ public class ViewOption implements UserOption {
         String bookListString = "";
         for (int i = 0; i < bookList.size(); i++)
         {
-            bookListString += String.valueOf(i + 1) + ". " + bookList.get(i) + "\n";
+            bookListString += String.valueOf(i + 1) + ". " + bookList.get(i).show() + "\n";
         }
 
         return bookListString;

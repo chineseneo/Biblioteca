@@ -34,6 +34,7 @@ public class IO {
             writer.write(message);
             writer.flush();
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("Fatal error occured, system will abort");
             System.exit(1);
         }

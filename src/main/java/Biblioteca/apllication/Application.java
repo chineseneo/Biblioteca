@@ -1,6 +1,8 @@
 package Biblioteca.apllication;
 
 import Biblioteca.IO.IO;
+import Biblioteca.library.Book;
+import Biblioteca.library.Library;
 import Biblioteca.option.CheckOption;
 import Biblioteca.option.ReserveOption;
 import Biblioteca.option.UserOption;
@@ -13,6 +15,7 @@ import java.util.Scanner;
 public class Application {
 
     IO io;
+    Library library;
     private String welcomeString = "Welcome to the Biblioteca system!\n";
     private String menuOptionString = "\nValid options are:\n" +
             "1. View all books\n" +
@@ -21,7 +24,10 @@ public class Application {
             "4. exit\n" +
             "Please make a choice:\n";
     private String declineMessage = "Select a valid option!!\n";
-    private List<String> bookList;
+    private List<Book> bookList;
+    private ArrayList<String> nameList;
+    private ArrayList<String> authorList;
+    private ArrayList<String> priceList;
 
     public static void main(String[] args)
     {
@@ -31,9 +37,7 @@ public class Application {
 
     public Application(IO io) {
         this.io = io;
-        bookList = new ArrayList<String>();
-        bookList.add("Head First Java");
-        bookList.add("Head First Ruby");
+        library = new Library();
     }
 
     public void run(){
@@ -50,10 +54,10 @@ public class Application {
         switch (choice)
         {
             case 1:
-                option = new ViewOption(bookList);
+                option = new ViewOption(library.getBookList());
                 break;
             case 2:
-                option = new ReserveOption(bookList, io);
+                option = new ReserveOption(library.getBookList(), io);
                 break;
             case 3:
                 option = new CheckOption();

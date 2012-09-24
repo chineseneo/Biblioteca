@@ -1,11 +1,12 @@
 package Biblioteca.option;
 
 import Biblioteca.IO.IO;
+import Biblioteca.library.Book;
+import Biblioteca.library.Library;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
@@ -21,17 +22,16 @@ public class ReserveOptionTest {
     private String successMessage = "Thank You! Enjoy the book.";
     private String failMessage = "Sorry we don't have that book yet.";
 
-    private List<String> bookList;
+    private List<Book> bookList;
     private ReserveOption option;
     private IO io;
 
     @Before
     public void init() {
-        bookList = new ArrayList<String>();
-        bookList.add("Head First Java");
-        bookList.add("Head First Ruby");
+
         io = new IO();
         io.setWriter(new BufferedWriter(new StringWriter()));
+        bookList = new Library().getBookList();
     }
 
     @Test

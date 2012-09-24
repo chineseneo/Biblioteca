@@ -1,8 +1,10 @@
 package Biblioteca.option;
 
-import org.junit.*;
+import Biblioteca.library.Book;
+import Biblioteca.library.Library;
+import org.junit.Before;
+import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
@@ -15,20 +17,24 @@ import static junit.framework.Assert.assertEquals;
  * To change this template use File | Settings | File Templates.
  */
 public class ViewOptionTest {
+
+    private List<Book> bookList;
+
     @Test
     public void shouldRenderBookList()
     {
-        List<String> bookList = new ArrayList<String>();
-        bookList.add("Head First Java");
-        bookList.add("Head First Ruby");
-
         String bookListString="";
         for(int i = 0; i < bookList.size(); i++)
         {
-            bookListString += String.valueOf(i + 1) + ". " + bookList.get(i) + "\n";
+            bookListString += String.valueOf(i + 1) + ". " + bookList.get(i).show() + "\n";
         }
 
         ViewOption option = new ViewOption(bookList);
         assertEquals(bookListString, option.execute());
+    }
+
+    @Before
+    public void init() {
+        bookList = new Library().getBookList();
     }
 }
