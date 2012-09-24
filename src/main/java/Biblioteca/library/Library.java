@@ -17,12 +17,50 @@ public class Library {
 
     public Library()
     {
+        initBooks();
+        initMovie();
+    }
+
+    private void initMovie() {
+        movieList = new ArrayList<Movie>();
+        Movie Scholay = new Movie("Scholay", "1975", "Ramesh Sippy");
+        Movie Shawshank = new Movie("The Shawshank Redemption", "1994", "Frank Darabont", "9.2");
+        Movie GodFather = new Movie("The Godfather", "1972", "Francis Ford Coppola", "9.2");
+        Movie PulpFiction = new Movie("Pulp Fiction", "1994", "Quentin Tarantino", "9.0");
+        Movie TheGoodTheBadAndTheUgly = new Movie("The Good, the Bad and the Ugly", "1967", "Sergio Leone", "9.0");
+        Movie AngryMen = new Movie("12 Angry Men", "1957", "Sidney Lumet ", "8.9");
+        Movie Schindler = new Movie("Schindler's List", "1993", "Steven Spielberg", "8.9");
+        Movie TheDarkKnight = new Movie("The Dark Knight", "2004", "Christopher Nolan", "8.9");
+        Movie Rings3 = new Movie("The Lord of the Rings: The Return of the King", "2003", "Peter Jackson", "8.9");
+        Movie FlewOver = new Movie("One Flew Over the Cuckoo's Nest", "1975", "Milos Forman", "8.8");
+        Movie StarWars = new Movie("Star Wars: Episode V - The Empire Strikes Back", "1980", "Irvin Kershner", "8.8");
+        Movie FightClub = new Movie("Fight Club", "1999", "David Fincher", "8.8");
+        Movie SevenSamurai = new Movie("Seven Samurai", "1956", "Akira Kurosawa", "8.8");
+        Movie Inception = new Movie("Inception", "2011", "Christopher Nolan");
+        Movie Rings1 = new Movie("The Lord of the Rings: The Fellowship of the Ring", "2001", "Peter Jackson", "8.8");
+        movieList.add(Scholay);
+        movieList.add(Shawshank);
+        movieList.add(GodFather);
+        movieList.add(PulpFiction);
+        movieList.add(TheGoodTheBadAndTheUgly);
+        movieList.add(AngryMen);
+        movieList.add(Schindler);
+        movieList.add(TheDarkKnight);
+        movieList.add(Rings3);
+        movieList.add(FlewOver);
+        movieList.add(StarWars);
+        movieList.add(FightClub);
+        movieList.add(SevenSamurai);
+        movieList.add(Inception);
+        movieList.add(Rings1);
+    }
+
+    private void initBooks() {
         bookList = new ArrayList<Book>();
         Book headFirstJava = new Book("Head First Java", "Sierra & Bates", "79.00");
         Book headFirstRails = new Book("Head First Rails", "David Griffiths", "49.99");
         bookList.add(headFirstJava);
         bookList.add(headFirstRails);
-        movieList = new ArrayList<Movie>();
     }
 
     public List<Book> getBookList() {
