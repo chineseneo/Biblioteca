@@ -1,8 +1,6 @@
 package Biblioteca.IO;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -15,6 +13,12 @@ import java.util.Scanner;
 public class IO {
     private BufferedWriter writer;
     private BufferedReader reader;
+
+    public IO()
+    {
+        writer = new BufferedWriter(new OutputStreamWriter(System.out));
+        reader = new BufferedReader(new InputStreamReader(System.in));
+    }
 
     public void setWriter(BufferedWriter writer) {
         this.writer = writer;

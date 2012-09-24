@@ -27,8 +27,6 @@ public class Application {
     public static void main(String[] args)
     {
         IO io = new IO();
-        io.setWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
-        io.setReader(new BufferedReader(new InputStreamReader(System.in)));
         new Application(io).run();
     }
 
