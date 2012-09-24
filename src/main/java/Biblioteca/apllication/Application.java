@@ -6,7 +6,6 @@ import Biblioteca.option.ReserveOption;
 import Biblioteca.option.UserOption;
 import Biblioteca.option.ViewOption;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -39,28 +38,31 @@ public class Application {
 
     public void run(){
             showWelcomeMessage();
-            while (true)
-            {
-                showMenuOption();
-                executeUserOption(acceptUserOption());
-            }
+        boolean continueFlag = true;
+        while (continueFlag) {
+            showMenuOption();
+            continueFlag = executeUserOption(acceptUserOption());
+        }
     }
 
-    private void executeUserOption(int choice) {
+    private boolean executeUserOption(int choice) {
         UserOption option;
         switch (choice)
         {
-            case 1:option = new ViewOption(bookList);
+            case 1:
+                option = new ViewOption(bookList);
                 break;
-            case 2:option = new ReserveOption(bookList, io);
+            case 2:
+                option = new ReserveOption(bookList, io);
                 break;
-            case 3:option = new CheckOption();
+            case 3:
+                option = new CheckOption();
                 break;
-            case 4:System.exit(0);
             default:
-                return;
+                return false;
         }
         io.print(option.execute());
+        return true;
     }
 
     public void showWelcomeMessage()  {
