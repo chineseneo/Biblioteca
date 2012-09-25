@@ -3,10 +3,7 @@ package Biblioteca.apllication;
 import Biblioteca.IO.IO;
 import Biblioteca.library.Book;
 import Biblioteca.library.Library;
-import Biblioteca.option.CheckOption;
-import Biblioteca.option.ReserveOption;
-import Biblioteca.option.UserOption;
-import Biblioteca.option.ViewBookOption;
+import Biblioteca.option.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +16,10 @@ public class Application {
     private String welcomeString = "Welcome to the Biblioteca system!\n";
     private String menuOptionString = "\nValid options are:\n" +
             "1. View all books\n" +
-            "2. Reserve a book\n" +
-            "3. check details\n" +
-            "4. exit\n" +
+            "2. View all movies\n" +
+            "3. Reserve a book\n" +
+            "4. check details\n" +
+            "5. exit\n" +
             "Please make a choice:\n";
     private String declineMessage = "Select a valid option!!\n";
     private List<Book> bookList;
@@ -57,9 +55,12 @@ public class Application {
                 option = new ViewBookOption(library.getBookList());
                 break;
             case 2:
-                option = new ReserveOption(library.getBookList(), io);
+                option = new ViewMovieOption(library.getMovieList());
                 break;
             case 3:
+                option = new ReserveOption(library.getBookList(), io);
+                break;
+            case 4:
                 option = new CheckOption();
                 break;
             default:
