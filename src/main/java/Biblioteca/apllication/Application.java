@@ -99,7 +99,6 @@ public class Application {
         return optionCount;
     }
 
-
     public void setMenuOptionString(String menuOptionString) {
         this.menuOptionString = menuOptionString;
     }
