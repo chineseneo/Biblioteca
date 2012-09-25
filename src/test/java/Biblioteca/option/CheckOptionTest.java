@@ -2,7 +2,9 @@ package Biblioteca.option;
 
 import org.junit.*;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 
 /**
@@ -21,5 +23,13 @@ public class CheckOptionTest {
         CheckOption option = new CheckOption();
         option.setCheckDetailsMessage(checkDetailsString);
         assertEquals(checkDetailsString, option.execute());
+    }
+
+    @Test
+    public void shouldRenderLibraryNumber()
+    {
+        String number = "111-1111";
+        CheckOption option = new CheckOption(number);
+        assertThat(option.execute(), is(number));
     }
 }

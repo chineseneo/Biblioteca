@@ -19,4 +19,9 @@ public class User {
     public String ID() {
         return ID;  //To change body of created methods use File | Settings | File Templates.
     }
+
+    public boolean verify(String ID, String password) {
+        return this.ID.equals(ID) && this.password.equals(password);
+
+    }
 }

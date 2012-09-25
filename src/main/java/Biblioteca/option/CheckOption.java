@@ -9,10 +9,19 @@ package Biblioteca.option;
  */
 public class CheckOption implements UserOption {
     private String checkDetailsString = "Please talk to Librarian. Thank you.\n";
+    private String number;
+
+    public CheckOption(String number) {
+        this.number = number;
+    }
+
+    public CheckOption() {
+        this.number = null;
+    }
 
     public String execute()
     {
-        return checkDetailsString;
+        return this.number == null ? checkDetailsString : (number + "\n");
     }
 
     public void setCheckDetailsMessage(String checkDetailsMessage) {

@@ -14,11 +14,14 @@ public class Library {
 
     private List<Book> bookList;
     private List<Movie> movieList;
+    private List<User> userList;
 
     public Library()
     {
         initBooks();
         initMovie();
+        userList = new ArrayList<User>();
+        userList.add(new User("111-1111", "password"));
     }
 
     private void initMovie() {
@@ -76,6 +79,23 @@ public class Library {
     }
 
     public List<Movie> getMovieList() {
-        return movieList;  //To change body of created methods use File | Settings | File Templates.
+        return movieList;
+    }
+
+    public void addUser(User user) {
+        userList.add(user);
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public Boolean userExist(String ID, String password) {
+        for(User user : userList)
+        {
+            if (user.verify(ID, password))
+                return true;
+        }
+        return false;
     }
 }

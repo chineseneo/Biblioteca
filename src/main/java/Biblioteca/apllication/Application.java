@@ -22,10 +22,14 @@ public class Application {
             "5. exit\n" +
             "Please make a choice:\n";
     private String declineMessage = "Select a valid option!!\n";
+    private String requestForUserIDString = "Please input your ID:\n";
+    private String requestForUserPasswordString = "Please input your password:\n";
     private List<Book> bookList;
     private ArrayList<String> nameList;
     private ArrayList<String> authorList;
     private ArrayList<String> priceList;
+    private String ID;
+    private String password;
 
     public static void main(String[] args)
     {
@@ -39,15 +43,25 @@ public class Application {
     }
 
     public void run(){
-            showWelcomeMessage();
+        showWelcomeMessage();
+        boolean loginFlag = userLogin();
         boolean continueFlag = true;
         while (continueFlag) {
             showMenuOption();
-            continueFlag = executeUserOption(acceptUserOption());
+            continueFlag = executeUserOption(acceptUserOption(), loginFlag);
         }
     }
 
-    private boolean executeUserOption(int choice) {
+    private boolean userLogin() {
+        io.print(requestForUserIDString);
+        Scanner scanner = io.getScanner();
+        ID = scanner.nextLine();
+        io.print(requestForUserPasswordString);
+        password = scanner.nextLine();
+        return library.userExist(ID, password);
+    }
+
+    private boolean executeUserOption(int choice, boolean login) {
         UserOption option;
         switch (choice)
         {
@@ -61,7 +75,7 @@ public class Application {
                 option = new ReserveOption(library.getBookList(), io);
                 break;
             case 4:
-                option = new CheckOption();
+                option = login ? new CheckOption(ID) : new CheckOption();
                 break;
             default:
                 return false;
