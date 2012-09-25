@@ -27,9 +27,9 @@ public class ViewMovieOptionTest {
         String movieListString = "Movie\tYear\tDirector\tRating\n";
         for (int i = 0; i < movieList.size(); i++)
         {
-            movieListString += String.valueOf(i + 1) + movieList.get(i).show() + "\n";
+            movieListString += movieList.get(i).show() + "\n";
         }
-        ViewMovieOption option = new ViewMovieOption(new Library());
+        ViewMovieOption option = new ViewMovieOption(new Library().getMovieList());
         assertThat(option.execute(), is(movieListString));
     }
 }
